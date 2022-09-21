@@ -742,11 +742,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\moura\\source\\repos\\flights\\flights\\flights.csproj",
+      "projectUniqueName": "C:\\Users\\moura\\Flights\\flights\\flights\\flights.csproj",
       "projectName": "flights",
-      "projectPath": "C:\\Users\\moura\\source\\repos\\flights\\flights\\flights.csproj",
+      "projectPath": "C:\\Users\\moura\\Flights\\flights\\flights\\flights.csproj",
       "packagesPath": "C:\\Users\\moura\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\moura\\source\\repos\\flights\\flights\\obj\\",
+      "outputPath": "C:\\Users\\moura\\Flights\\flights\\flights\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
