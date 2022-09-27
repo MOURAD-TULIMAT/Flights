@@ -1,0 +1,4 @@
+﻿*.suo
+*.dll
+flights/flights/bin/Debug/net5.0/flights.Views.pdb
+*.pdb
