@@ -12,7 +12,8 @@
 .headerc {
     position: fixed;
     top: 0;
-    width: 100%;
+    width:100vw;
+    max-width: 100%;
     height: 4.5rem;
     background-color: rgb(54, 35, 161);
 }
@@ -153,6 +154,7 @@
     padding: 0;
     height: calc(100vh - 4.5rem);
     width: 100vw;
+    max-width: 100%;
     background-image: url("../images/bg.jpg");
     background-repeat: no-repeat;
     background-size: cover;

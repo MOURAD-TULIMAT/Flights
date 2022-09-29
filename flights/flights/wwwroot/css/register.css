@@ -1,6 +1,6 @@
 ﻿.regbox {
     display: none;
-    position: absolute;
+    position: fixed;
     top: calc(50% + 4.5rem);
     left: 50%;
     height: fit-content;
