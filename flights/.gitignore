@@ -73,6 +73,9 @@ artifacts/
 *.pidb
 *.svclog
 *.scc
+*.v2
+*.cache
+*.editoconfig
 
 # Chutzpah Test files
 _Chutzpah*
