@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using flights.DTOs
+@model UserDto
+<!DOCTYPE html>
 
 <head>
     <link rel="stylesheet" href="css/main.css">
@@ -6,6 +8,25 @@
     <link rel="stylesheet" href="css/footer.css">
 
 </head>
+
+<script>
+
+    function verifyPassword() {
+      var pw = document.getElementById("pwd").value;
+      var repw = document.getElementById("repwd").value;
+      var btn = document.getElementById("btn");
+      if(pw != repw) {
+          btn.disabled = true;
+         document.getElementById("message").innerHTML = "Confirmation Password should match the Password";
+         return false;
+      }
+      else{
+          btn.disabled = false;
+          document.getElementById("message").innerHTML = "";
+         return true;
+      }
+    }
+</script>
 
 <body>
     <div class="headerc">
@@ -32,43 +53,52 @@
             }
         </div>
     </div>
-
-    <div id="login" class="regbox">
-        <button class="close_button" onclick="unVlogin()"></button>
-        <div class="input_container">
-            <p>Email Address:</p>
-            <input type="email" placeholder="Email Address" class="input_txt">
+    <form asp-controller="Home" asp-action="Login" method="POST">
+        <div id="login" class="regbox">
+            <button class="close_button" onclick="unVlogin()" asp-action="Close"></button>
+            <div class="input_container">
+                <p>Email Address:</p>
+                <input type="email" placeholder="Email Address" class="input_txt" asp-for="Email">
+            </div>
+            <div class="input_container">
+                <p>Password:</p>
+                <input type="password" placeholder="Password" class="input_txt" asp-for="Password">
+            </div>
+            <button class="window_button">
+                login
+            </button>
         </div>
-        <div class="input_container">
-            <p>Password:</p>
-            <input type="password" placeholder="Password" class="input_txt">
+    </form>
+    <form asp-controller="Home" asp-action="Signup" method="POST" onchange="return verifyPassword()">
+        <div id="signup" class="regbox">
+            <button class="close_button" onclick="unVsignup()" asp-action="Close"></button>
+            <div class="input_container">
+                <p>First Name:</p>
+                <input type="text" placeholder="First Name" class="input_txt" asp-for="Fname">
+            </div>
+            <div class="input_container">
+                <p>Last Name:</p>
+                <input type="text" placeholder="Last Name" class="input_txt" asp-for="Lname">
+            </div>
+            <div class="input_container">
+                <p>Email Address:</p>
+                <input type="email" placeholder="Email Address" class="input_txt" asp-for="Email">
+            </div>
+            <div class="input_container">
+                <p>Password:</p>
+                <input type="password" placeholder="Password" class="input_txt" id="pwd" asp-for="Password">
+            </div>
+            <div class="input_container">
+                <p>Confirmation Password:</p>
+                <input type="password" placeholder="Password" class="input_txt" id="repwd" asp-for="Password">
+            </div>
+            <br>
+            <span id="message" style="color:red;font-size:12px"> </span> <br><br>
+            <button class="window_button" id="btn">
+                sign up
+            </button>
         </div>
-        <button class="window_button">
-            login
-        </button>
-    </div>
-    <div id="signup" class="regbox">
-        <button class="close_button" onclick="unVsignup()"></button>
-        <div class="input_container">
-            <p>First Name:</p>
-            <input type="text" placeholder="First Name" class="input_txt">
-        </div>
-        <div class="input_container">
-            <p>Last Name:</p>
-            <input type="text" placeholder="Last Name" class="input_txt">
-        </div>
-        <div class="input_container">
-            <p>Email Address:</p>
-            <input type="email" placeholder="Email Address" class="input_txt">
-        </div>
-        <div class="input_container">
-            <p>Password:</p>
-            <input type="password" placeholder="Password" class="input_txt">
-        </div>
-        <button class="window_button">
-            sign up
-        </button>
-    </div>
+    </form>
 
 
     <div id="blur">

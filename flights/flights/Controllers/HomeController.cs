@@ -1,11 +1,8 @@
-﻿using flights.Models;
+﻿using flights.DTOs;
+using flights.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace flights.Controllers
 {
@@ -23,10 +20,24 @@ namespace flights.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        [HttpPost]
+        public IActionResult Login(UserDto userDto)
         {
-            return View();
+            return RedirectToAction("", "Home");
         }
+
+        [HttpPost]
+        public IActionResult Signup(UserDto userDto)
+        {
+            return RedirectToAction("", "Home");
+        }
+
+        [HttpPost]
+        public IActionResult Close(UserDto userDto)
+        {
+            return RedirectToAction("", "Home");
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
