@@ -546,3 +546,12 @@ flights/flights/obj/Debug/net5.0/Razor/Views/Shared/_Layout.cshtml.g.cs
 *.g.cs
 *.xml
 *.txt
+*.v2
+flights/flights/bin/Debug/net5.0/flights.dll
+*.pdb
+*.dll
+*.g.cs
+*.cache
+*.json
+*.props
+*.targets
