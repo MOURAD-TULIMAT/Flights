@@ -14,6 +14,7 @@
 </head>
 
 <body>
+
     <div class="headerc">
         <a href="@Url.Action("","Home")">
             <div class="logo header_logo">
@@ -40,57 +41,57 @@
             }
         </div>
     </div>
-
     <main role="main">
-        <form asp-controller="Home" asp-action="Login" method="POST">
-            <div id="login" name="window" class="regbox">
-                <button class="close_button" onclick="unVActionWindow()" asp-action=""></button>
-                <div class="input_container">
-                    <p>Email Address:</p>
-                    <input type="email" placeholder="Email Address" class="input_txt" asp-for="Email">
-                </div>
-                <div class="input_container">
-                    <p>Password:</p>
-                    <input type="password" placeholder="Password" class="input_txt" asp-for="Password">
-                </div>
-                <button class="window_button">
-                    login
-                </button>
-            </div>
-        </form>
-        <form asp-controller="Home" asp-action="Signup" method="POST" onchange="return verifyPassword()">
-            <div id="signup" name="window" class="regbox">
-                <button class="close_button" onclick="unVActionWindow()" asp-action=""></button>
-                <div class="input_container">
-                    <p>First Name:</p>
-                    <input type="text" placeholder="First Name" class="input_txt" asp-for="Fname">
-                </div>
-                <div class="input_container">
-                    <p>Last Name:</p>
-                    <input type="text" placeholder="Last Name" class="input_txt" asp-for="Lname">
-                </div>
-                <div class="input_container">
-                    <p>Email Address:</p>
-                    <input type="email" placeholder="Email Address" class="input_txt" asp-for="Email">
-                </div>
-                <div class="input_container">
-                    <p>Password:</p>
-                    <input type="password" placeholder="Password" class="input_txt" id="pwd" asp-for="Password">
-                </div>
-                <div class="input_container">
-                    <p>Confirmation Password:</p>
-                    <p><input type="password" placeholder="Password" class="input_txt" id="repwd" asp-for="Password"></p>
-                    <span id="message" style="position:absolute; margin-top:-.7rem; color:red;font-size:12px"> </span>
-                </div>
-                <button class="window_button" id="btn">
-                    sign up
-                </button>
-            </div>
-        </form>
         @RenderBody()
     </main>
-    
     <script src="./js/layout.js"></script>
+
+    <form asp-controller="Home" asp-action="Login" method="POST">
+        <div id="login" name="window" class="regbox">
+            <button class="close_button" onclick="unVActionWindow()" asp-action=""></button>
+            <div class="input_container">
+                <p>Email Address:</p>
+                <input type="email" placeholder="Email Address" class="input_txt" asp-for="Email">
+            </div>
+            <div class="input_container">
+                <p>Password:</p>
+                <input type="password" placeholder="Password" class="input_txt" asp-for="Password">
+            </div>
+            <button class="window_button">
+                login
+            </button>
+        </div>
+    </form>
+    <form asp-controller="Home" asp-action="Signup" method="POST" onchange="return verifyPassword()">
+        <div id="signup" name="window" class="regbox">
+            <button class="close_button" onclick="unVActionWindow()" asp-action=""></button>
+            <div class="input_container">
+                <p>First Name:</p>
+                <input type="text" placeholder="First Name" class="input_txt" asp-for="Fname">
+            </div>
+            <div class="input_container">
+                <p>Last Name:</p>
+                <input type="text" placeholder="Last Name" class="input_txt" asp-for="Lname">
+            </div>
+            <div class="input_container">
+                <p>Email Address:</p>
+                <input type="email" placeholder="Email Address" class="input_txt" asp-for="Email">
+            </div>
+            <div class="input_container">
+                <p>Password:</p>
+                <input type="password" placeholder="Password" class="input_txt" id="pwd" asp-for="Password">
+            </div>
+            <div class="input_container">
+                <p>Confirmation Password:</p>
+                <p><input type="password" placeholder="Password" class="input_txt" id="repwd" asp-for="Password"></p>
+                <span id="message" style="position:absolute; margin-top:-.7rem; color:red;font-size:12px"> </span>
+            </div>
+            <button class="window_button" id="btn">
+                sign up
+            </button>
+        </div>
+    </form>
+
 
 </body>
 </html>
