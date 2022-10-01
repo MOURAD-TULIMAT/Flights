@@ -1,30 +1,20 @@
-﻿function Vlogin() {
-    document.getElementById("signup").style.display = "none";
+﻿function VActionWindow() {
+    const id = event.target.getAttribute("data-viewid");
+    //document.getElementById("signup").style.display = "none";
+    const regboxes = document.getElementsByClassName("regbox");
+    Array.from(regboxes).forEach(x => x.style.display = "none");
     const regblock = document.querySelector("#blur");
     regblock.classList.add("blur");
-    document.getElementById("login").style.display = "flex";
-    window.scrollTo(0, 0);
-    disableScroll();
-}
-function unVlogin() {
-    const regblock = document.querySelector("#blur");
-    regblock.classList.remove("blur");
-    document.getElementById("login").style.display = "none";
-    enableScroll();
-}
+    document.getElementById(id).style.display = "flex";
 
-function Vsignup() {
-    document.getElementById("login").style.display = "none";
-    const regblock = document.querySelector("#blur");
-    regblock.classList.add("blur");
-    document.getElementById("signup").style.display = "flex";
     window.scrollTo(0, 0);
     disableScroll();
 }
-function unVsignup() {
+function unVActionWindow() {
     const regblock = document.querySelector("#blur");
     regblock.classList.remove("blur");
-    document.getElementById("signup").style.display = "none";
+    const regboxes = document.getElementsByClassName("regbox");
+    Array.from(regboxes).forEach(x => x.style.display = "none");
     enableScroll();
 }
 
@@ -43,6 +33,22 @@ function preventDefaultForScrollKeys(e) {
     }
 }
 
+function verifyPassword() {
+    var pw = document.getElementById("pwd").value;
+    var repw = document.getElementById("repwd").value;
+    var btn = document.getElementById("btn");
+    if (pw != repw) {
+        btn.disabled = true;
+        document.getElementById("message").innerHTML = "Confirmation Password should match the Password";
+        return false;
+    }
+    else {
+        btn.disabled = false;
+        document.getElementById("message").innerHTML = "";
+        return true;
+    }
+}
+
 // modern Chrome requires { passive: false } when adding event
 var supportsPassive = false;
 try {
@@ -56,15 +62,15 @@ var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewh
 
 
 function disableScroll() {
-  window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
-  window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
-  window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
-  window.addEventListener('keydown', preventDefaultForScrollKeys, false);
+    window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
+    window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
+    window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
+    window.addEventListener('keydown', preventDefaultForScrollKeys, false);
 }
 
 function enableScroll() {
-  window.removeEventListener('DOMMouseScroll', preventDefault, false);
-  window.removeEventListener(wheelEvent, preventDefault, wheelOpt); 
-  window.removeEventListener('touchmove', preventDefault, wheelOpt);
-  window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
+    window.removeEventListener('DOMMouseScroll', preventDefault, false);
+    window.removeEventListener(wheelEvent, preventDefault, wheelOpt);
+    window.removeEventListener('touchmove', preventDefault, wheelOpt);
+    window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
 }

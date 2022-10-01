@@ -3,6 +3,17 @@
     padding: 0;
     background-color: blueviolet;
 }
+body:hover{
+    cursor:default
+}
+
+a {
+    text-decoration: none;
+}
+
+b {
+    text-shadow: 0 0 .2rem rgb(92, 0, 116,.5);
+}
 
 .blur {
     filter: blur(2px) brightness(75%);
@@ -12,7 +23,7 @@
 .headerc {
     position: fixed;
     top: 0;
-    width:100vw;
+    width: 100vw;
     max-width: 100%;
     height: 4.5rem;
     background-color: rgb(54, 35, 161);
@@ -27,6 +38,10 @@
     margin-left: 1rem;
     color: rgb(229, 197, 255);
 }
+
+    .header_logo:hover {
+        cursor:pointer;
+    }
 
 .home_logo {
     color: rgba(70, 0, 128, 0.568);
@@ -67,22 +82,22 @@
     }
 
 .home_button {
-    margin: .5rem;
+    margin: 1.5rem;
     color: rgb(0, 0, 0);
-    font-weight: bolder;
-    width: 5rem;
-    height: 3rem;
+    font-size: 1.5em;
+    width: 7rem;
+    height: 4rem;
     border-width: 0;
     border-radius: .2rem;
     background-color: rgb(255, 232, 223);
-    box-shadow: .5rem .5rem .5rem 0 rgba(93, 70, 94, 0.356);
-    transition: .4s;
+    box-shadow: .5rem .5rem .5rem 0 rgba(93, 70, 94, 0.4);
+    transition: .3s;
 }
 
     .home_button:hover {
-        box-shadow: .7rem .7rem .5rem 0 rgba(93, 70, 94, 0.486);
+        box-shadow: .7rem .7rem .5rem 0 rgba(93, 70, 94, 0.7);
         background-color: rgb(255, 211, 194);
-        transition: .4s;
+        transition: .3s;
     }
 
 .disc_text {
@@ -185,8 +200,9 @@
     line-height: 1.5rem;
     font-size: .9rem;
     padding-left: .5rem;
-    transition:.4s;
+    transition: .4s;
 }
+
     .input_txt:invalid {
         border-color: red;
         box-shadow: 0 0 .5rem -.1rem red;
@@ -203,7 +219,7 @@
     border-width: 1px;
     border-radius: 1rem;
     width: 4rem;
-    min-width:fit-content;
+    min-width: fit-content;
     height: 2rem;
     font-size: 1rem;
     color: aliceblue;
@@ -212,9 +228,9 @@
     transition: .4s;
 }
 
-.window_button:hover {
-    color: rgb(255, 255, 255);
-    background-color: rgb(149, 82, 255);
-    box-shadow: .5rem .5rem 1rem -.5rem black;
-    transition: .4s;
-}
+    .window_button:hover {
+        color: rgb(255, 255, 255);
+        background-color: rgb(149, 82, 255);
+        box-shadow: .5rem .5rem 1rem -.5rem black;
+        transition: .4s;
+    }

@@ -19,6 +19,11 @@ namespace flights.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public IActionResult Offers()
+        {
+            return View();
+        }
 
         [HttpPost]
         public IActionResult Login(UserDto userDto)
