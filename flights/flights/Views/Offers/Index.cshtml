@@ -53,11 +53,31 @@
                 <span class="offers-list-item-prop" style="width:50%">
                     Max Baggage Weight:
                     <span> <button style="border: 0; font-weight: bolder" data-viewid="book @id" onclick="sub()"> - </button></span>
-                    <b id="Weight @id">20kg</b>
+                    <input type="text" id="Weight @id" style="width:3rem" value="20kg" readonly="readonly" onchange="print()" />
                     <span> <button style="border: 0; font-weight: bolder" data-viewid="book @id" onclick="add()"> + </button></span>
                 </span>
+            </div>
+            <div class="offers-item">
+                <div class="offers-list-item-prop" style="width:40%">
+                    <p>Gender:</p>
+                    <input type="radio" name="gender" value="Male"><label for="paypal"><img style="height:1.1rem" src="./images/paypal.png"></label>
+                    <input type="radio" name="gender" value="Female"><label for="CorD">Credit or Debit</label>
+                </div>
+                <div class="offers-list-item-prop" style="width:40%">
+                    <p>Name on Card:</p>
+                    <input type="text" placeholder="Name" class="input_txt" asp-for="Fname">
+                </div>
+                <div class="offers-list-item-prop" style="width:40%">
+                    <p>Card Number</p>
+                    <input type="text" placeholder="Last Name" class="input_txt" asp-for="Lname">
+                </div>
+                <div class="offers-list-item-prop" style="width:40%">
+                    <p>Security Code:</p>
+                    <input type="password" placeholder="Password" class="input_txt">
+                </div>
 
             </div>
+
         </div>
 
 
