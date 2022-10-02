@@ -1,4 +1,6 @@
-﻿function VActionWindow() {
+﻿var Weightl = -1;
+function VActionWindow() {
+    Weightl = -1
     const id = event.target.getAttribute("data-viewid");
     //document.getElementById("signup").style.display = "none";
     const regboxes = document.getElementsByClassName("regbox");
@@ -28,32 +30,45 @@
     window.scrollTo(0, 0);
     disableScroll();
 }
+
+function print() {
+    console.log({ event });
+}
+
 function unVActionWindow() {
+    Weightl = -1
     const regblock = document.querySelector("#blur");
     regblock.classList.remove("blur");
     const regboxes = document.getElementsByClassName("regbox");
     Array.from(regboxes).forEach(x => x.style.display = "none");
     enableScroll();
 }
-const Weightl = -1;
 function sub() {
-    const id = event.target.getAttribute("data-viewid");
+    const id = event.target.getAttribute("data-viewid").split(' ')[1];
     const x = document.getElementById("Weight " + id);
-    const pr = x.innerHTML.substr(0, x.innerHTML.length - 2);
+    const y = document.getElementById("total " + id);
+    const pr = x.value.substr(0, x.value.length - 2);
+    const pry = y.innerHTML.substr(0, y.innerHTML.length - 1);
     if (Weightl == -1) {
         Weightl = parseInt(pr);
     }
-    if (parseInt(pr) - 5 >= Weightl)
-        x.innerHTML = "" + (parseInt(pr) - 5) + "kg";
+    if (parseInt(pr) - 5 >= Weightl) {
+        x.value = "" + (parseInt(pr) - 5) + "kg";
+        y.innerHTML = "" + (parseInt(pry) - 20) + "$";
+    }
 }
-function sum() {
-    const id = event.target.getAttribute("data-viewid");
+function add() {
+    const id = event.target.getAttribute("data-viewid").split(' ')[1];
+    console.log(id);
     const x = document.getElementById("Weight " + id);
-    const pr = x.innerHTML.substr(0, x.innerHTML.length - 2);
+    const y = document.getElementById("total " + id);
+    const pr = x.value.substr(0, x.value.length - 2);
+    const pry = y.innerHTML.substr(0, y.innerHTML.length - 1);
     if (Weightl == -1) {
         Weightl = parseInt(pr);
     }
-    x.innerHTML = "" + (parseInt(pr) + 5) + "kg";
+    x.value = "" + (parseInt(pr) + 5) + "kg";
+    y.innerHTML = "" + (parseInt(pry) + 20) + "$";
 }
 
 

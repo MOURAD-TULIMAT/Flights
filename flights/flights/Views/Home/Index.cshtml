@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-<body  >
+<body>
 
     <div class="home_body" id="blur">
         <h1 class="body_disc logo home_logo">
@@ -19,13 +19,13 @@
                 </button>
             </a>
             <a>
-                <button class="home_button">
-                    Search
+                <button class="home_button" style="width:fit-content">
+                    My Bookings
                 </button>
             </a>
             <a>
-                <button class="home_button">
-                    Filter
+                <button class="home_button" data-viewid="search" onclick="VActionWindow()">
+                    Search
                 </button>
             </a>
         </div>
@@ -41,4 +41,71 @@
 
 </body>
 
+<div id="search" class="regbox offers-Item-box">
+    <button class="book-button" onclick="VActionWindow()">Search</button>
+    <button class="close_button" onclick="unVActionWindow()"></button>
+    <div class="offers-item">
+        <div class="offers-list-item-prop" style="width:40%">
+            <p>Traveling from:</p>
+            <select class="input_txt" name="from" id="from">
+                @{
+                    for (int i = 0; i < 10; i++)
+                    {
+                        <option value="airport @i"> airport @i</option>
+
+                    }
+                }
+            </select>
+        </div>
+        <div class="offers-list-item-prop" style="width:40%">
+            <p>Traveling to:</p>
+            <select class="input_txt" name="to" id="to">
+                @{
+                    for (int i = 0; i < 10; i++)
+                    {
+                        <option value="airport @i"> airport @i</option>
+
+                    }
+                }
+            </select>
+        </div>
+        <div style="width:10%"></div>
+        <div style="height:.5rem">
+            <input type="checkbox" value="Direct" /><label for="Direct">Direct only</label>
+        </div>
+        <div style="width:70%"></div>
+        <div class="offers-list-item-prop" style="width:40%">
+            <p>Depart:</p>
+            <input type="date" placeholder="" class="input_txt">
+        </div>
+        <div class="offers-list-item-prop" style="width:40%">
+            <p>Return:</p>
+            <input type="date" placeholder="" class="input_txt">
+        </div>
+        <div style="width:90%"></div>
+        <div style="width:90%"></div>
+        <div class="offers-list-item-prop" style="width:27%">
+            <select class="input_txt" name="type" id="type">
+                <option value="Adult"> Economy</option>
+                <option value="Adult"> Premium Economy</option>
+                <option value="Adult"> Business</option>
+                <option value="Adult"> First Class</option>
+
+            </select>
+        </div>
+        <div class="offers-list-item-prop" style="width:27%">
+            <select class="input_txt" name="from" id="type">
+                <option value="Adult"> adult</option>
+                <option value="Adult"> Child</option>
+                <option value="Adult"> infant</option>
+            </select>
+        </div>
+        <div class="offers-list-item-prop" style="width:27%">
+            <input type="radio" name="tran" value="Oneway"><label for="Oneway">One way</label><br />
+            <input type="radio" name="tran" value="Return"><label for="Return">Return</label>
+        </div>
+        <div style="width:90%"></div>
+        <div style="width:90%"></div>
+    </div>
+</div>
 </html>
