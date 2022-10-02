@@ -71,6 +71,12 @@ function add() {
     y.innerHTML = "" + (parseInt(pry) + 20) + "$";
 }
 
+function retdir() {
+    const x = document.getElementById("ph").style.display;
+    const y = document.getElementById("return").style.display;
+    document.getElementById("ph").style.display = y;
+    document.getElementById("return").style.display = x;
+}
 
 // left: 37, up: 38, right: 39, down: 40,
 // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
