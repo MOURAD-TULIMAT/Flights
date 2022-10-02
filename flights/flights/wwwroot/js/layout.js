@@ -5,8 +5,26 @@
     Array.from(regboxes).forEach(x => x.style.display = "none");
     const regblock = document.querySelector("#blur");
     regblock.classList.add("blur");
-    document.getElementById(id).style.display = "flex";
 
+    document.getElementById(id).style.display = "flex";
+    if (id.split(' ')[0] == 'book') {
+        const x = document.getElementsByName("Type " + id.split(' ')[1]);
+        var i = 0;
+        for (; i < x.length; i++) {
+            if (x[i].checked == true) {
+                break;
+            }
+        }
+        const y = document.getElementsByName("tktT " + id.split(' ')[1]);
+        var j = 0;
+        for (; j < y.length; j++) {
+            if (y[j].tagName == x[i].defaultValue) {
+                break;
+            }
+        }
+
+        document.getElementById("ticket " + id.split(' ')[1]).innerHTML = y[i].innerHTML + " (" + x[i].defaultValue + " type)"
+    }
     window.scrollTo(0, 0);
     disableScroll();
 }
@@ -17,6 +35,27 @@ function unVActionWindow() {
     Array.from(regboxes).forEach(x => x.style.display = "none");
     enableScroll();
 }
+const Weightl = -1;
+function sub() {
+    const id = event.target.getAttribute("data-viewid");
+    const x = document.getElementById("Weight " + id);
+    const pr = x.innerHTML.substr(0, x.innerHTML.length - 2);
+    if (Weightl == -1) {
+        Weightl = parseInt(pr);
+    }
+    if (parseInt(pr) - 5 >= Weightl)
+        x.innerHTML = "" + (parseInt(pr) - 5) + "kg";
+}
+function sum() {
+    const id = event.target.getAttribute("data-viewid");
+    const x = document.getElementById("Weight " + id);
+    const pr = x.innerHTML.substr(0, x.innerHTML.length - 2);
+    if (Weightl == -1) {
+        Weightl = parseInt(pr);
+    }
+    x.innerHTML = "" + (parseInt(pr) + 5) + "kg";
+}
+
 
 // left: 37, up: 38, right: 39, down: 40,
 // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36

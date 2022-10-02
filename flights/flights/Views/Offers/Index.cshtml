@@ -9,11 +9,11 @@
             @{
                 var c = new List<string>() { "#ececec", "#ffffff" };
                 var x = 0;
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < 10; i++)
                 {
                     <div class="offers-list-item" style="background-color:@c.ElementAt(x);">
-                        <button class=" list-button" data-viewid="book" onclick="VActionWindow()">
-                            <span class="list-button-txt" data-viewid="book">Book Now</span>
+                        <button class=" list-button" data-viewid="offer @i" onclick="VActionWindow()">
+                            <span class="list-button-txt" data-viewid="offer @i">Book Now</span>
                         </button>
                         <span class="offers-list-item-prop">From Airport:           <b> Airport @i         </b>   </span>
                         <span class="offers-list-item-prop">To Airport:             <b> Airport @(i + 1)   </b>   </span>
@@ -32,47 +32,84 @@
         </div>
     </div>
 </div>
-<div id="book" class="regbox offers-Item-box">
-    <button class="close_button" onclick="unVActionWindow()" asp-action=""></button>
-    <div class="offers-item">
-        <span class="offers-list-item-prop" style="width:40%">From Airport:           <b> Airport1        </b>   </span>
-        <span class="offers-list-item-prop" style="width:40%">To Airport:             <b> Airport2        </b>   </span>
-        <span class="offers-list-item-prop" style="width:40%">Airplane:               <b> Airplane1       </b>   </span>
-        <span class="offers-list-item-prop" style="width:40%">Departure Time:         <b> 11:00           </b>   </span>
-        <span class="offers-list-item-prop" style="width:40%">Arrival Time:           <b> 12:00           </b>   </span>
-        <span class="offers-list-item-prop" style="width:40%">Date:                   <b> 1/3/2023        </b>   </span>
-        <span class="offers-list-item-prop" style="width:40%">TicketPrice:            <b> 200$            </b>   </span>
-        <span class="offers-list-item-prop" style="width:40%">Business Ticket Price:  <b> 100$            </b>   </span>
-        <span class="offers-list-item-prop" style="width:40%">Econominy Ticket Price: <b> 50$             </b>   </span>
-        <span class="offers-list-item-prop" style="width:40%">Child Ticket Price:     <b> 20$             </b>   </span>
-        <span class="offers-list-item-prop" style="width:40%">Max Baggage Weight:     <b> 20kg             </b>   </span>
-    </div>
-    <div class="offers-item">
-        <button style="position:absolute; right:0; top:30%; transform:scale(150%)translateY(-50%);">book و سهم و أشياء</button>
-        <div class="offers-list-item-prop" style="width:40%">
-            <p>First Name:</p>
-            <input type="text" placeholder="First Name" class="input_txt" asp-for="Fname">
+@{
+    for (int id = 0; id < 10; id++)
+    {
+        /* invioce */
+        <div id="book @id" class="regbox offers-Item-box">
+            <button class="book-button" data-viewid="book @id" onclick="VActionWindow()">Book</button>
+            <button class="close_button" onclick="unVActionWindow()"></button>
+            <div class="offers-item">
+                <span class="offers-list-item-prop" style="width:40%">From Airport:        <b> Airport @id        </b>   </span>
+                <span class="offers-list-item-prop" style="width:40%">To Airport:          <b> Airport @(id + 1)  </b>   </span>
+                <span class="offers-list-item-prop" style="width:40%">Airplane:            <b> Airplane@(id)      </b>   </span>
+                <span class="offers-list-item-prop" style="width:40%">Departure Time:      <b> 1@(id):00          </b>   </span>
+                <span class="offers-list-item-prop" style="width:40%">Arrival Time:        <b> 1@(id+1):00        </b>   </span>
+                <span class="offers-list-item-prop" style="width:40%">Date:                <b> @id/3/2023         </b>   </span>
+                <span class="offers-list-item-prop" style="width:40%">Ticket Price:        <b id="ticket @id"> 100$  </b>   </span>
+                <span class="offers-list-item-prop" style="width:40%">Total:               <b id="total @id"> 100$   </b>   </span>
+            </div>
+            <div class="offers-item">
+                <span class="offers-list-item-prop" style="width:50%">
+                    Max Baggage Weight:
+                    <span> <button style="border: 0; font-weight: bolder" data-viewid="book @id" onclick="sub()"> - </button></span>
+                    <b id="Weight @id">20kg</b>
+                    <span> <button style="border: 0; font-weight: bolder" data-viewid="book @id" onclick="add()"> + </button></span>
+                </span>
+
+            </div>
         </div>
-        <div class="offers-list-item-prop" style="width:40%">
-            <p>Last Name:</p>
-            <input type="text" placeholder="Last Name" class="input_txt" asp-for="Lname">
+
+
+        /* info */
+        <div id="offer @id" class="regbox offers-Item-box">
+            <button class="book-button" data-viewid="book @id" onclick="VActionWindow()">Book</button>
+            <button class="close_button" onclick="unVActionWindow()"></button>
+            <div class="offers-item">
+                <span class="offers-list-item-prop" style="width:40%">From Airport:           <b> Airport @id        </b>   </span>
+                <span class="offers-list-item-prop" style="width:40%">To Airport:             <b> Airport @(id + 1)  </b>   </span>
+                <span class="offers-list-item-prop" style="width:40%">Airplane:               <b> Airplane@(id)      </b>   </span>
+                <span class="offers-list-item-prop" style="width:40%">Departure Time:         <b> 1@(id):00          </b>   </span>
+                <span class="offers-list-item-prop" style="width:40%">Arrival Time:           <b> 1@(id+1):00        </b>   </span>
+                <span class="offers-list-item-prop" style="width:40%">Date:                   <b> @id/3/2023         </b>   </span>
+                <span class="offers-list-item-prop" style="width:40%">Business Ticket Price:  <b name="tktT @id" id="Business"> 100$              </b>   </span>
+                <span class="offers-list-item-prop" style="width:40%">Econominy Ticket Price: <b name="tktT @id" id="Econominy"> 50$               </b>   </span>
+                <span class="offers-list-item-prop" style="width:40%">Child Ticket Price:     <b name="tktT @id" id="Child"> 20$               </b>   </span>
+                <span class="offers-list-item-prop" style="width:40%">Max Baggage Weight:     <b> 20kg              </b>   </span>
+            </div>
+            <div class="offers-item">
+                <div class="offers-list-item-prop" style="width:40%">
+                    <p>First Name:</p>
+                    <input type="text" placeholder="First Name" class="input_txt" asp-for="Fname">
+                </div>
+                <div class="offers-list-item-prop" style="width:40%">
+                    <p>Last Name:</p>
+                    <input type="text" placeholder="Last Name" class="input_txt" asp-for="Lname">
+                </div>
+                <div class="offers-list-item-prop" style="width:40%">
+                    <p>Nationality:</p>
+                    <input type="text" placeholder="Nationality" class="input_txt">
+                </div>
+                <div class="offers-list-item-prop" style="width:40%">
+                    <p>Gender:</p>
+                    <input type="radio" name="gender" value="Male"><label for="Male">Male</label>
+                    <input type="radio" name="gender" value="Female"><label for="Female">Female</label>
+                </div>
+                <div class="offers-list-item-prop" style="width:40%">
+                    <p>Birth Date:</p>
+                    <input type="date" placeholder="Birth Date" class="input_txt">
+                </div>
+                <div class="offers-list-item-prop" style="width:40%">
+                    <p>Passport NO:</p>
+                    <input type="text" placeholder="Passport NO" class="input_txt">
+                </div>
+                <div class="offers-list-item-prop" style="width:90%; margin-bottom:-1rem">
+                    <p>Ticket Type:</p>
+                    <input type="radio" name="Type @id" value="Business"><label for="Business">Business</label>
+                    <input type="radio" name="Type @id" value="Econominy"><label for="Econominy">Econominy</label>
+                    <input type="radio" name="Type @id" value="Child"><label for="Child">Child</label>
+                </div>
+            </div>
         </div>
-        <div class="offers-list-item-prop" style="width:40%">
-            <p>Nationality:</p>
-            <input type="email" placeholder="Nationality" class="input_txt">
-        </div>
-        <div class="offers-list-item-prop" style="width:40%">
-            <p>Gender:</p>
-            <input type="radio" name="gender" value="Male"><label for="Male">Male</label>
-            <input type="radio" name="gender" value="Female"><label for="Female">Female</label>
-        </div>
-        <div class="offers-list-item-prop" style="width:40%">
-            <p>Birth Date:</p>
-            <input type="date" placeholder="Birth Date" class="input_txt">
-        </div>
-        <div class="offers-list-item-prop" style="width:40%">
-            <p>Passport NO:</p>
-            <input type="text" placeholder="Passport NO" class="input_txt">
-        </div>
-    </div>
-</div>
+    }
+}
