@@ -13,7 +13,7 @@
 
 </head>
 
-<body>
+<body onload="laoding(@TempData["login"])">
 
     <div class="headerc">
         <a href="@Url.Action("","Home")">
@@ -45,7 +45,6 @@
         @RenderBody()
     </main>
 
-
     <form asp-controller="Home" asp-action="Login" method="POST">
         <div id="login" name="window" class="regbox">
             <button class="close_button" onclick="unVActionWindow()" asp-action=""></button>
@@ -56,6 +55,8 @@
             <div class="input_container">
                 <p>Password:</p>
                 <input type="password" placeholder="Password" class="input_txt" asp-for="Password">
+                <br><br>
+                <span id="cred" style="color:red;font-size:14px"> </span>
             </div>
             <button class="window_button">
                 login

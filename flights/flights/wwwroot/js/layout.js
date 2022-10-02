@@ -113,3 +113,39 @@ function enableScroll() {
     window.removeEventListener('touchmove', preventDefault, wheelOpt);
     window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
 }
+
+function laoding(status) {
+    if (String(status) === "false") {
+        const id = "login";
+        const regboxes = document.getElementsByClassName("regbox");
+        Array.from(regboxes).forEach(x => x.style.display = "none");
+        const regblock = document.querySelector("#blur");
+        regblock.classList.add("blur");
+
+        document.getElementById(id).style.display = "flex";
+        if (id.split(' ')[0] == 'book') {
+            const x = document.getElementsByName("Type " + id.split(' ')[1]);
+            var i = 0;
+            for (; i < x.length; i++) {
+                if (x[i].checked == true) {
+                    break;
+                }
+            }
+            const y = document.getElementsByName("tktT " + id.split(' ')[1]);
+            var j = 0;
+            for (; j < y.length; j++) {
+                if (y[j].tagName == x[i].defaultValue) {
+                    break;
+                }
+            }
+
+            document.getElementById("ticket " + id.split(' ')[1]).innerHTML = y[i].innerHTML + " (" + x[i].defaultValue + " type)"
+        }
+        window.scrollTo(0, 0);
+        disableScroll();
+        document.getElementById("cred").innerHTML = "Invalid Credentials!";
+        TempData["Message"] = "";
+    }
+    else
+        document.getElementById("cred").innerHTML = "";
+}
