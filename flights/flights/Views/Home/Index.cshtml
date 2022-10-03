@@ -13,21 +13,39 @@
             Easy, fast and simple
         </p>
         <div class="home_buttons">
-            <a href="@Url.Action("","Offers")">
-                <button class="home_button">
-                    Offers
-                </button>
-            </a>
-            <a>
-                <button class="home_button" style="width:fit-content">
-                    My Bookings
-                </button>
-            </a>
-            <a>
-                <button class="home_button" data-viewid="search" onclick="VActionWindow()">
-                    Search
-                </button>
-            </a>
+            @{
+                if (true)
+                {
+
+                    <a href="@Url.Action("","Offers")">
+                        <button class="home_button">
+                            Offers
+                        </button>
+                    </a>
+                    if (true)
+                    {
+                        <a href="@Url.Action("","Offers")">
+                            <button class="home_button" style="width:fit-content">
+                                My Bookings
+                            </button>
+                        </a>
+                    }
+                    <button class="home_button" data-viewid="search" onclick="VActionWindow()">
+                        Search
+                    </button>
+                }
+                else
+                {
+                    <button class="home_button" data-viewid="addoffer" onclick="VActionWindow()">
+                        AddOffer
+                    </button>
+                    <a href="@Url.Action("","Offers")">
+                        <button class="home_button" style="width:fit-content">
+                            My Offers
+                        </button>
+                    </a>
+                }
+            }
         </div>
     </div>
     <div class="footer">
@@ -110,6 +128,106 @@
     </form>
 </body>
 
+<div id="addoffer" class="regbox offers-Item-box">
+    <button class="book-button" onclick="VActionWindow()">Add</button>
+    <button class="close_button" onclick="unVActionWindow()"></button>
+    <div class="offers-item">
+        <div class="offers-list-item-prop" style="width: 49%">
+            <p>
+                From Airport:
+                <span>
+                    <select class="input_txt" name="to" id="to">
+                        @{
+                            for (int i = 0; i < 10; i++)
+                            {
+                                <option value="airport @i"> airport @i</option>
+                            }
+                        }
+                    </select>
+                </span>
+            </p>
+        </div>
+        <div class="offers-list-item-prop" style="width: 45%">
+            <p>
+                To Airport:
+                <span>
+                    <select class="input_txt" name="to" id="to">
+                        @{
+                            for (int i = 0; i < 10; i++)
+                            {
+                                <option value="airport @i"> airport @i</option>
+                            }
+                        }
+                    </select>
+                </span>
+            </p>
+        </div>
+        <div style="height:.5rem">
+            <input type="checkbox" value="Direct" /><label for="Direct">Direct only</label>
+        </div>
+        <div class="offers-list-item-prop" style="width:27%">
+            <input type="radio" name="tran" value="Oneway" onchange="retdir2()"><label for="Oneway">One way</label>
+            <input type="radio" name="tran" value="Return" onchange="retdir2()"><label for="Return">Return</label>
+        </div>
+        <div style="width:70%"></div>
+        <div class="offers-list-item-prop" style="width:49%">
+            <p>
+                Depart Time:
+                <span><input type="date" placeholder="" class="input_txt" style="width: 6.5rem;"></span>
+                At
+                <span><input type="time" placeholder="" class="input_txt" style="width:3rem;"></span>
+            </p>
+        </div>
+        <div id="ph2" style="width: 45%">
+        </div>
+        <div id="return2" class="offers-list-item-prop" style="width:45%; display: none">
+            <p>
+                Return:
+                <span><input type="date" placeholder="" class="input_txt" style="width: 6.5rem;"></span>
+                At
+                <span><input type="time" placeholder="" class="input_txt" style="width:3rem;"></span>
+            </p>
+        </div>
+        <div style="width:90%"></div>
+        <div style="width:90%"></div>
+        <div class="offers-list-item-prop" style="width:8em">
+            Available Seats:
+            <p>
+                <input type="checkbox" value="Economypr" onclick="toro()" /><label for="Economy">Economy</label>
+            </p>
+            <p>
+                <input type="checkbox" value="Premiumpr" onclick="toro()" /><label for="Primium">Premium</label>
+            </p>
+
+        </div>
+        <div class="offers-list-item-prop" style="width:5rem; padding-top: 1.2rem">
+
+            <input type="number" id="Economypr" placeholder="0" readonly class="input_txt" style="width: 3rem; margin-top: .3rem"> $
+
+            <input type="number" id="Premiumpr" placeholder="0" readonly class="input_txt" style="width: 3rem; margin-top: .3rem; "> $
+
+        </div>
+        <div class="offers-list-item-prop" style="width:8em; padding-top: .8rem">
+
+            <p>
+                <input type="checkbox" value="Businesspr" onclick="toro()" /><label for="Business">Business</label>
+            </p>
+            <p>
+                <input type="checkbox" value="Firstpr" onclick="toro()" /><label for="First Class">First Class</label>
+            </p>
+        </div>
+        <div class="offers-list-item-prop" style="width:5rem; padding-top: 1.2rem">
+
+            <input type="number" id="Businesspr" placeholder="0" readonly class="input_txt" style="width: 3rem; margin-top: .3rem "> $
+
+            <input type="number" id="Firstpr" placeholder="0" readonly="readonly" class="input_txt" style="width: 3rem; margin-top: .3rem"> $
+
+        </div>
+        <div style="width:90%"></div>
+        <div style="width:90%"></div>
+    </div>
+</div>
+
 <div id="search" class="regbox offers-Item-box">
     <button class="book-button" onclick="VActionWindow()">Search</button>
     <button class="close_button" onclick="unVActionWindow()"></button>
@@ -121,7 +239,6 @@
                     for (int i = 0; i < 10; i++)
                     {
                         <option value="airport @i"> airport @i</option>
-
                     }
                 }
             </select>
@@ -133,25 +250,36 @@
                     for (int i = 0; i < 10; i++)
                     {
                         <option value="airport @i"> airport @i</option>
-
                     }
                 }
             </select>
         </div>
         <div style="width:10%"></div>
         <div style="height:.5rem">
-            <input type="checkbox" value="Direct" onclick="retdir()" /><label for="Direct">Direct only</label>
+            <input type="checkbox" value="Direct" /><label for="Direct">Direct only</label>
+        </div>
+        <div class="offers-list-item-prop" style="width:27%">
+            <input type="radio" name="tran" value="Oneway" onchange="retdir1()"><label for="Oneway">One way</label>
+            <input type="radio" name="tran" value="Return" onchange="retdir1()"><label for="Return">Return</label>
         </div>
         <div style="width:70%"></div>
-        <div class="offers-list-item-prop" style="width:40%">
-            <p>Depart:</p>
-            <input type="date" placeholder="" class="input_txt">
+        <div class="offers-list-item-prop" style="width:49%">
+            <p>
+                Depart Time:
+                <span><input type="date" placeholder="" class="input_txt" style="width: 6.5rem;"></span>
+                At
+                <span><input type="time" placeholder="" class="input_txt" style="width:3rem;"></span>
+            </p>
         </div>
-        <div id="ph" style="width:40%">
+        <div id="ph1" style="width: 45%">
         </div>
-        <div id="return"class="offers-list-item-prop" style="width:40%; display:none">
-            <p>Return:</p>
-            <input type="date" placeholder="" class="input_txt">
+        <div id="return1" class="offers-list-item-prop" style="width:45%; display: none">
+            <p>
+                Return:
+                <span><input type="date" placeholder="" class="input_txt" style="width: 6.5rem;"></span>
+                At
+                <span><input type="time" placeholder="" class="input_txt" style="width:3rem;"></span>
+            </p>
         </div>
         <div style="width:90%"></div>
         <div style="width:90%"></div>
@@ -170,10 +298,6 @@
                 <option value="Adult"> Child</option>
                 <option value="Adult"> infant</option>
             </select>
-        </div>
-        <div class="offers-list-item-prop" style="width:27%">
-            <input type="radio" name="tran" value="Oneway"><label for="Oneway">One way</label><br />
-            <input type="radio" name="tran" value="Return"><label for="Return">Return</label>
         </div>
         <div style="width:90%"></div>
         <div style="width:90%"></div>

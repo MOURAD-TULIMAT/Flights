@@ -71,11 +71,24 @@ function add() {
     y.innerHTML = "" + (parseInt(pry) + 20) + "$";
 }
 
-function retdir() {
-    const x = document.getElementById("ph").style.display;
-    const y = document.getElementById("return").style.display;
-    document.getElementById("ph").style.display = y;
-    document.getElementById("return").style.display = x;
+function retdir2() {
+    x = event.target.value == "Return";
+
+    document.getElementById("ph2").style.display = (!x) ? "none" : "block";
+    document.getElementById("return2").style.display = x ? "none" : "block";
+}
+
+
+function retdir1() {
+    x = event.target.value == "Return";
+
+    document.getElementById("ph1").style.display = (!x) ? "none" : "block";
+    document.getElementById("return1").style.display = x ? "none" : "block";
+}
+
+function toro() {
+    const id = event.target.getAttribute("value");
+    document.getElementById(id).readOnly = !(document.getElementById(id).readOnly);
 }
 
 // left: 37, up: 38, right: 39, down: 40,

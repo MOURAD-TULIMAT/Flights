@@ -204,9 +204,9 @@ b {
     background-color: rgb(255, 255, 255);
     border-color: rgb(154, 141, 158);
     outline: 0;
-    box-shadow: 0 0 .5rem -.1rem black;
+    box-shadow: 0 0 .6rem -.4rem black;
     border-style: solid;
-    width: 80%;
+    width: 8rem;
     border-radius: .5rem;
     line-height: 1.5rem;
     font-size: .9rem;
