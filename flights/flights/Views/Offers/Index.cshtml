@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using flights.DTOs
+@model AllInfoDto
+<!DOCTYPE html>
 <div class="home_body" " id="blur">
     <div class="big-box">
         <p class="box-title">
@@ -9,22 +11,23 @@
             @{
                 var c = new List<string>() { "#ececec", "#ffffff" };
                 var x = 0;
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < Model.Flights.Count(); i++)
                 {
+                    var flight = Model.Flights.ElementAt(i);
                     <div class="offers-list-item" style="background-color:@c.ElementAt(x);">
                         <button class=" list-button" data-viewid="offer @i" onclick="VActionWindow()">
                             <span class="list-button-txt" data-viewid="offer @i">Book Now</span>
                         </button>
-                        <span class="offers-list-item-prop">From Airport:           <b> Airport @i         </b>   </span>
-                        <span class="offers-list-item-prop">To Airport:             <b> Airport @(i + 1)   </b>   </span>
-                        <span class="offers-list-item-prop">Airplane:               <b> Airplane@(i)       </b>   </span>
-                        <span class="offers-list-item-prop">Departure Time:         <b> 1@(i):00           </b>   </span>
-                        <span class="offers-list-item-prop">Arrival Time:           <b> 1@(i+1):00         </b>   </span>
-                        <span class="offers-list-item-prop">Date:                   <b> @i/3/2023          </b>   </span>
-                        <span class="offers-list-item-prop">TicketPrice:            <b> @i/3/2023          </b>   </span>
-                        <span class="offers-list-item-prop">Business Ticket Price:  <b> 100$               </b>   </span>
-                        <span class="offers-list-item-prop">Econominy Ticket Price: <b> 50$                </b>   </span>
-                        <span class="offers-list-item-prop">Child Ticket Price:     <b> 20$                </b>   </span>
+                        <span class="offers-list-item-prop">From Airport:           <b> @flight.FromAirport             </b>   </span>
+                        <span class="offers-list-item-prop">To Airport:             <b> @flight.ToAirport               </b>   </span>
+                        <span class="offers-list-item-prop">Airplane:               <b> @flight.Airplane                </b>   </span>
+                        <span class="offers-list-item-prop">Departure Time:         <b> @flight.DepartureTime           </b>   </span>
+                        <span class="offers-list-item-prop">Arrival Time:           <b> @flight.ArrivalTime             </b>   </span>
+                        <span class="offers-list-item-prop">Date:                   <b> @flight.Date                    </b>   </span>
+                        <span class="offers-list-item-prop">Ticket Price:           <b> @flight.TicketPrice             </b>   </span>
+                        <span class="offers-list-item-prop">Business Ticket Price:  <b> @flight.BusinessTicketPrice     </b>   </span>
+                        <span class="offers-list-item-prop">Econominy Ticket Price: <b> @flight.EconominyTicketPrice    </b>   </span>
+                        <span class="offers-list-item-prop">Child Ticket Price:     <b> @flight.ChildTicketPrice        </b>   </span>
                     </div>
                     x = 1 - x;
                 }
@@ -33,28 +36,31 @@
     </div>
 </div>
 @{
-    for (int id = 0; id < 10; id++)
+    for (int id = 0; id < Model.Flights.Count(); id++)
     {
         /* invioce */
+        var flight = Model.Flights.ElementAt(id);
         <div id="book @id" class="regbox offers-Item-box">
-            <button class="book-button" data-viewid="book @id" onclick="VActionWindow()">Book</button>
-            <button class="close_button" onclick="unVActionWindow()"></button>
-            <div class="offers-item">
-                <span class="offers-list-item-prop" style="width:40%">From Airport:        <b> Airport @id        </b>   </span>
-                <span class="offers-list-item-prop" style="width:40%">To Airport:          <b> Airport @(id + 1)  </b>   </span>
-                <span class="offers-list-item-prop" style="width:40%">Airplane:            <b> Airplane@(id)      </b>   </span>
-                <span class="offers-list-item-prop" style="width:40%">Departure Time:      <b> 1@(id):00          </b>   </span>
-                <span class="offers-list-item-prop" style="width:40%">Arrival Time:        <b> 1@(id+1):00        </b>   </span>
-                <span class="offers-list-item-prop" style="width:40%">Date:                <b> @id/3/2023         </b>   </span>
-                <span class="offers-list-item-prop" style="width:40%">Ticket Price:        <b id="ticket @id"> 100$  </b>   </span>
-                <span class="offers-list-item-prop" style="width:40%">Total:               <b id="total @id"> 100$   </b>   </span>
-            </div>
+            <form asp-controller="Offers" asp-action="Book" method="POST">
+                <button class="book-button" data-viewid="book @id" onclick="VActionWindow()" asp-action="Book">Book</button>
+                <button class="close_button" onclick="unVActionWindow()" asp-action=""></button>
+                <div class="offers-item">
+                    <span class="offers-list-item-prop" style="width:40%">From Airport:        <b> @flight.FromAirport             </b>   </span>
+                    <span class="offers-list-item-prop" style="width:40%">To Airport:          <b> @flight.ToAirport               </b>   </span>
+                    <span class="offers-list-item-prop" style="width:40%">Airplane:            <b> @flight.Airplane                </b>   </span>
+                    <span class="offers-list-item-prop" style="width:40%">Departure Time:      <b> @flight.DepartureTime           </b>   </span>
+                    <span class="offers-list-item-prop" style="width:40%">Arrival Time:        <b> @flight.ArrivalTime             </b>   </span>
+                    <span class="offers-list-item-prop" style="width:40%">Date:                <b> @flight.Date                    </b>   </span>
+                    <span class="offers-list-item-prop" style="width:40%">Ticket Price:        <b id="ticket @id"> @flight.TicketPrice             </b>   </span>
+                    <span class="offers-list-item-prop" style="width:40%">Total:               <b id="total @id">  @flight.TicketPrice             </b>   </span>
+                </div>
+            </form>
             <div class="offers-item">
                 <span class="offers-list-item-prop" style="width:50%">
                     Max Baggage Weight:
-                    <span> <button style="border: 0; font-weight: bolder" data-viewid="book @id" onclick="sub()"> - </button></span>
-                    <input type="text" id="Weight @id" style="width:3rem" value="20kg" readonly="readonly" onchange="print()" />
-                    <span> <button style="border: 0; font-weight: bolder" data-viewid="book @id" onclick="add()"> + </button></span>
+                    <span> <button style="border: 0; font-weight: bolder" data-viewid="book @id" onclick="sub()" asp-action=""> - </button></span>
+                    <input type="text" id="Weight @id" style="width:3rem" value="30kg" readonly="readonly" onchange="print()" />
+                    <span> <button style="border: 0; font-weight: bolder" data-viewid="book @id" onclick="add()" asp-action=""> + </button></span>
                 </span>
             </div>
             <div class="offers-item">
@@ -75,10 +81,9 @@
                     <p>Security Code:</p>
                     <input type="password" placeholder="Password" class="input_txt">
                 </div>
-
             </div>
-
         </div>
+
 
 
         /* info */
@@ -86,25 +91,38 @@
             <button class="book-button" data-viewid="book @id" onclick="VActionWindow()">Book</button>
             <button class="close_button" onclick="unVActionWindow()"></button>
             <div class="offers-item">
-                <span class="offers-list-item-prop" style="width:40%">From Airport:           <b> Airport @id        </b>   </span>
-                <span class="offers-list-item-prop" style="width:40%">To Airport:             <b> Airport @(id + 1)  </b>   </span>
-                <span class="offers-list-item-prop" style="width:40%">Airplane:               <b> Airplane@(id)      </b>   </span>
-                <span class="offers-list-item-prop" style="width:40%">Departure Time:         <b> 1@(id):00          </b>   </span>
-                <span class="offers-list-item-prop" style="width:40%">Arrival Time:           <b> 1@(id+1):00        </b>   </span>
-                <span class="offers-list-item-prop" style="width:40%">Date:                   <b> @id/3/2023         </b>   </span>
-                <span class="offers-list-item-prop" style="width:40%">Business Ticket Price:  <b name="tktT @id" id="Business"> 100$              </b>   </span>
-                <span class="offers-list-item-prop" style="width:40%">Econominy Ticket Price: <b name="tktT @id" id="Econominy"> 50$               </b>   </span>
-                <span class="offers-list-item-prop" style="width:40%">Child Ticket Price:     <b name="tktT @id" id="Child"> 20$               </b>   </span>
-                <span class="offers-list-item-prop" style="width:40%">Max Baggage Weight:     <b> 20kg              </b>   </span>
+                <span class="offers-list-item-prop" style="width:40%">From Airport:           <b> @flight.FromAirport             </b>   </span>
+                <span class="offers-list-item-prop" style="width:40%">To Airport:             <b> @flight.ToAirport               </b>   </span>
+                <span class="offers-list-item-prop" style="width:40%">Airplane:               <b> @flight.Airplane                </b>   </span>
+                <span class="offers-list-item-prop" style="width:40%">Departure Time:         <b> @flight.DepartureTime           </b>   </span>
+                <span class="offers-list-item-prop" style="width:40%">Arrival Time:           <b> @flight.ArrivalTime             </b>   </span>
+                <span class="offers-list-item-prop" style="width:40%">Date:                   <b> @flight.Date                    </b>   </span>
+                <span class="offers-list-item-prop" style="width:40%">Ticket Price:           <b> @flight.TicketPrice             </b>   </span>
+                <span class="offers-list-item-prop" style="width:40%">Business Ticket Price:  <b name="tktT @id" id="Business">  @flight.BusinessTicketPrice     </b>   </span>
+                <span class="offers-list-item-prop" style="width:40%">Econominy Ticket Price: <b name="tktT @id" id="Econominy"> @flight.EconominyTicketPrice    </b>   </span>
+                <span class="offers-list-item-prop" style="width:40%">Child Ticket Price:     <b name="tktT @id" id="Child">     @flight.ChildTicketPrice        </b>   </span>
+                <span class="offers-list-item-prop" style="width:40%">Max Baggage Weight:     <b> 30kg                            </b>   </span>
             </div>
             <div class="offers-item">
                 <div class="offers-list-item-prop" style="width:40%">
                     <p>First Name:</p>
-                    <input type="text" placeholder="First Name" class="input_txt" asp-for="Fname">
+                    @{
+                        string fval = "";
+                        if (Model.User != null)
+                            fval = Model.User.Fname;
+
+                        <input required type="text" placeholder="First Name" class="input_txt" asp-for="Fname" value=@fval>
+                    }
                 </div>
                 <div class="offers-list-item-prop" style="width:40%">
                     <p>Last Name:</p>
-                    <input type="text" placeholder="Last Name" class="input_txt" asp-for="Lname">
+                    @{
+                        string lval = "";
+                        if (Model.User != null)
+                            lval = Model.User.Lname;
+
+                        <input type="text" placeholder="Last Name" class="input_txt" asp-for="Lname" value=@lval>
+                    }
                 </div>
                 <div class="offers-list-item-prop" style="width:40%">
                     <p>Nationality:</p>

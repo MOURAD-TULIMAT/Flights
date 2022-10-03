@@ -39,6 +39,17 @@ b {
     color: rgb(229, 197, 255);
 }
 
+.header_username {
+    font-family: 'Century Gothic';
+    font-size: 1rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+    line-height: 4.5rem;
+    margin-left: 76%;
+    color: rgb(229, 197, 255);
+}
+
     .header_logo:hover {
         cursor:pointer;
     }

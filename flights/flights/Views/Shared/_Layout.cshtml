@@ -1,5 +1,5 @@
 ﻿@using flights.DTOs
-@model UserDto
+@model AllInfoDto
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,21 +21,29 @@
                 <strong>Flights App</strong>
             </div>
         </a>
+        @{
+            if (TempData["currentUser"] != null && !string.IsNullOrEmpty(TempData["currentUser"].ToString()))
+            {
+                <b class="header_username">@TempData["currentUser"]</b>
+            }
+        }
         <div class="header_buttons_container">
             @{
-                if (true)
+                if (TempData["currentUser"] != null && !string.IsNullOrEmpty(TempData["currentUser"].ToString()))
+                {
+                    <button class="header_button">
+                        <a href="@Url.Action("Logout")">
+                            logout
+                        </a>
+                    </button>
+                }
+                else
                 {
                     <button class="header_button" data-viewid="login" onclick="VActionWindow()">
                         login
                     </button>
                     <button class="header_button" data-viewid="signup" onclick="VActionWindow()">
                         sign up
-                    </button>
-                }
-                else
-                {
-                    <button class="header_button">
-                        logout
                     </button>
                 }
             }
@@ -50,11 +58,11 @@
             <button class="close_button" onclick="unVActionWindow()" asp-action=""></button>
             <div class="input_container">
                 <p>Email Address:</p>
-                <input type="email" placeholder="Email Address" class="input_txt" asp-for="Email">
+                <input type="email" placeholder="Email Address" class="input_txt" asp-for="User.Email">
             </div>
             <div class="input_container">
                 <p>Password:</p>
-                <input type="password" placeholder="Password" class="input_txt" asp-for="Password">
+                <input type="password" placeholder="Password" class="input_txt" asp-for="User.Password">
                 <br><br>
                 <span id="cred" style="color:red;font-size:14px"> </span>
             </div>
@@ -68,23 +76,23 @@
             <button class="close_button" onclick="unVActionWindow()" asp-action=""></button>
             <div class="input_container">
                 <p>First Name:</p>
-                <input type="text" placeholder="First Name" class="input_txt" asp-for="Fname">
+                <input type="text" placeholder="First Name" class="input_txt" asp-for="User.Fname">
             </div>
             <div class="input_container">
                 <p>Last Name:</p>
-                <input type="text" placeholder="Last Name" class="input_txt" asp-for="Lname">
+                <input type="text" placeholder="Last Name" class="input_txt" asp-for="User.Lname">
             </div>
             <div class="input_container">
                 <p>Email Address:</p>
-                <input type="email" placeholder="Email Address" class="input_txt" asp-for="Email">
+                <input type="email" placeholder="Email Address" class="input_txt" asp-for="User.Email">
             </div>
             <div class="input_container">
                 <p>Password:</p>
-                <input type="password" placeholder="Password" class="input_txt" id="pwd" asp-for="Password">
+                <input type="password" placeholder="Password" class="input_txt" id="pwd" asp-for="User.Password">
             </div>
             <div class="input_container">
                 <p>Confirmation Password:</p>
-                <p><input type="password" placeholder="Password" class="input_txt" id="repwd" asp-for="Password"></p>
+                <p><input type="password" placeholder="Password" class="input_txt" id="repwd" asp-for="User.Password"></p>
                 <span id="message" style="position:absolute; margin-top:-.7rem; color:red;font-size:12px"> </span>
             </div>
             <button class="window_button" id="btn">

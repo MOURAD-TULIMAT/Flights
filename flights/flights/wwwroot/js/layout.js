@@ -164,3 +164,7 @@ function laoding(status) {
     else
         document.getElementById("cred").innerHTML = "";
 }
+
+function prefillname(user) {
+
+}

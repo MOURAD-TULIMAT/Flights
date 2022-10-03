@@ -1,11 +1,11 @@
 ﻿using flights.Data;
 using flights.DTOs;
 using flights.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
-using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace flights.Controllers
@@ -14,53 +14,90 @@ namespace flights.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _context;
+        private IHttpContextAccessor _accessor;
 
         public HomeController(
+            IHttpContextAccessor accessor,
             ILogger<HomeController> logger,
             ApplicationDbContext context)
         {
+            _accessor = accessor;
             _logger = logger;
             _context = context;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult Offers()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> LoginAsync(UserDto userDto)
+        public async Task<IActionResult> IndexAsync()
         {
             try
             {
+                string email = _accessor.HttpContext.Request.Cookies["currentUser"];
+                if (!string.IsNullOrEmpty(email))
+                {
+                    var account = await _context.
+                        Accounts.FirstAsync(a => a.UserName == email);
+
+                    TempData["currentUser"] = account.UserName;
+
+                    var adminTyoe = await _context
+                        .AccountTypes.FirstAsync(a => a.Name == "Admin");
+
+                    var userType = UserType.User;
+
+                    if (account.TypeId == adminTyoe.Id)
+                        userType = UserType.Admin;
+
+                    TempData["currentUserType"] = userType.ToString();
+                }
+
+                return View();
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("", "Error");
+            }
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> LoginAsync(AllInfoDto allInfo)
+        {
+            try
+            {
+                var userDto = allInfo.User;
+
                 var account = await _context
                     .Accounts.FirstOrDefaultAsync(a => a.UserName == userDto.Email);
-                
+
                 if (account == null)
                 {
                     TempData["login"] = "false";
                     return RedirectToAction("", "Home");
                 }
 
-                if(account.Password != userDto.Password)
+                if (account.Password != userDto.Password)
                 {
                     TempData["login"] = "false";
                     return RedirectToAction("", "Home");
                 }
 
-                var userTyoe = await _context
-                    .AccountTypes.FirstAsync(a => a.Name == "User");
 
                 var adminTyoe = await _context
                     .AccountTypes.FirstAsync(a => a.Name == "Admin");
 
+                var userType = UserType.User;
 
+                if (account.TypeId == adminTyoe.Id)
+                    userType = UserType.Admin;
+
+                CookieOptions option = new()
+                {
+                    Expires = DateTime.Now.AddDays(1)
+                };
+                Response.Cookies.Append("currentUser", account.UserName, option);
+
+                ViewBag.credentials = true;
+                TempData["currentUser"] = account.UserName;
+                TempData["currentUserType"] = userType.ToString();
 
                 return RedirectToAction("", "Home");
             }
@@ -71,10 +108,12 @@ namespace flights.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SignupAsync(UserDto userDto)
+        public async Task<IActionResult> SignupAsync(AllInfoDto allInfo)
         {
             try
             {
+                var userDto = allInfo.User;
+
                 var accountTyoe = await _context
                     .AccountTypes.FirstAsync(a => a.Name == "User");
 
@@ -104,16 +143,38 @@ namespace flights.Controllers
 
                 return RedirectToAction("", "Home");
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return RedirectToAction("", "Error");
             }
         }
 
         [HttpPost]
-        public IActionResult Close(UserDto userDto)
+        public IActionResult Search()
         {
-            return RedirectToAction("", "Home");
+            try
+            {
+                return RedirectToAction("", "Offers");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("", "Error");
+            }
+        }
+
+
+        public IActionResult Logout()
+        {
+            try
+            {
+                Response.Cookies.Delete("currentUser");
+                TempData.Remove("currentUser");
+                return RedirectToAction("", "Home");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("", "Error");
+            }
         }
     }
 }
