@@ -90,14 +90,28 @@
                 <div style="height:.5rem">
                     <input type="checkbox" value="Direct" /><label for="Direct">Direct only</label>
                 </div>
-                <div style="width:70%"></div>
-                <div class="offers-list-item-prop" style="width:40%">
-                    <p>Depart:</p>
-                    <input type="date" placeholder="" class="input_txt">
+                <div class="offers-list-item-prop" style="width:27%">
+                    <input type="radio" name="tran" value="Oneway" onchange="retdir()"><label for="Oneway">One way</label>
+                    <input type="radio" name="tran" value="Return" onchange="retdir()"><label for="Return">Return</label>
                 </div>
-                <div class="offers-list-item-prop" style="width:40%">
-                    <p>Return:</p>
-                    <input type="date" placeholder="" class="input_txt">
+                <div style="width:70%"></div>
+                <div class="offers-list-item-prop" style="width:49%">
+                    <p>
+                        Depart Time:
+                        <span><input type="date" placeholder="" class="input_txt" style="width: 6.5rem;"></span>
+                        At
+                        <span><input type="time" placeholder="" class="input_txt" style="width:3rem;"></span>
+                    </p>
+                </div>
+                <div id="ph" style="width: 45%">
+                </div>
+                <div id="return" class="offers-list-item-prop" style="width:45%; display: none">
+                    <p>
+                        Return:
+                        <span><input type="date" placeholder="" class="input_txt" style="width: 6.5rem;"></span>
+                        At
+                        <span><input type="time" placeholder="" class="input_txt" style="width:3rem;"></span>
+                    </p>
                 </div>
                 <div style="width:90%"></div>
                 <div style="width:90%"></div>
@@ -116,10 +130,6 @@
                         <option value="Adult"> Child</option>
                         <option value="Adult"> infant</option>
                     </select>
-                </div>
-                <div class="offers-list-item-prop" style="width:27%">
-                    <input type="radio" name="tran" value="Oneway"><label for="Oneway">One way</label><br />
-                    <input type="radio" name="tran" value="Return"><label for="Return">Return</label>
                 </div>
                 <div style="width:90%"></div>
                 <div style="width:90%"></div>

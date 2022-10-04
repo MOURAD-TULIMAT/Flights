@@ -3,9 +3,10 @@
     padding: 0;
     background-color: blueviolet;
 }
-body:hover{
-    cursor:default
-}
+
+    body:hover {
+        cursor: default
+    }
 
 a {
     text-decoration: none;
@@ -50,9 +51,9 @@ b {
     color: rgb(229, 197, 255);
 }
 
-    .header_logo:hover {
-        cursor:pointer;
-    }
+.header_logo:hover {
+    cursor: pointer;
+}
 
 .home_logo {
     color: rgba(70, 0, 128, 0.568);
@@ -207,10 +208,11 @@ b {
     box-shadow: 0 0 .6rem -.4rem black;
     border-style: solid;
     width: 8rem;
-    border-radius: .5rem;
+    border-radius: .3rem;
     line-height: 1.5rem;
     font-size: .9rem;
     padding-left: .5rem;
+    outline: none;
     transition: .4s;
 }
 
@@ -219,6 +221,17 @@ b {
         box-shadow: 0 0 .5rem -.1rem red;
         transition: .4s;
     }
+
+    .input_txt:focus {
+        outline:none;
+    }    
+    .input_txt:hover {
+        outline:none;
+    }
+
+.reg_input_txt {
+    width: 80%;
+}
 
 .input_container {
     width: 100%;

@@ -6,6 +6,16 @@
         <p class="box-title">
             <span><a href="@Url.Action("", "Home")"> <strong><</strong> Back </a> | Offers:</span>
         </p>
+        <div class="filter">
+            Filter: 
+            <span>
+                <select class="input_txt" name="filter" id="filter">
+                    <option value="best"> best</option>
+                    <option value="cheapest"> cheapest</option>
+                    <option value="fastest"> fastest</option>
+                </select>
+            </span>
+        </div>
         <div class="offers-list">
             <div class="list-upper"></div>
             @{

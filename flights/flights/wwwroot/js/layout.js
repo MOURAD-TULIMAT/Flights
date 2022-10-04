@@ -74,21 +74,23 @@ function add() {
 function retdir2() {
     x = event.target.value == "Return";
 
-    document.getElementById("ph2").style.display = (!x) ? "none" : "block";
-    document.getElementById("return2").style.display = x ? "none" : "block";
+    document.getElementById("ph2").style.display = x ? "none" : "block";
+    document.getElementById("return2").style.display = (!x) ? "none" : "block";
 }
 
 
-function retdir1() {
+function retdir() {
     x = event.target.value == "Return";
 
-    document.getElementById("ph1").style.display = (!x) ? "none" : "block";
-    document.getElementById("return1").style.display = x ? "none" : "block";
+    document.getElementById("ph").style.display = x ? "none" : "block";
+    document.getElementById("return").style.display = !x ? "none" : "block";
 }
 
 function toro() {
     const id = event.target.getAttribute("value");
-    document.getElementById(id).readOnly = !(document.getElementById(id).readOnly);
+    const x = document.getElementById(id).readOnly;
+    if (!x) document.getElementById(id).value = null;
+    document.getElementById(id).readOnly = !x;
 }
 
 // left: 37, up: 38, right: 39, down: 40,
